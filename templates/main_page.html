@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VoxPop.kz</title>
+  </head>
+  <style>
+    .styled-link {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+  
+    .styled-link:hover {
+      text-decoration: underline;
+    }
+
+    .styled-topic {
+      color: #007bff;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .styled-topic:hover{
+      text-decoration: underline;
+    }
+  </style>
+      <body>
+        <a href="/create_topic" class="styled-link">Create Topic</a>
+        <ul>
+            {% for topic in topics %}
+            <li> <a href="/{{ topic.id }}" class="styled-topic">{{topic.text }}</a></li>
+            {% endfor %}
+        </ul>
+      </body>
+</html>

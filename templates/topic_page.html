@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    .styled-topic {
+      color: #007bff;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .styled-topic:hover{
+      text-decoration: underline;
+    }
+
+    .styled-text {
+          color: #333;
+          font-family: Arial, sans-serif;
+          font-size: 18px;
+          text-align: center;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+    
+      <body>
+        <h1>{{ topic.text }}</h1> </br>
+        <label class="styled-text">Comments:</label>
+        <ul>
+            {% for comment in comments %}
+            <li> {{ comment.text }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/add_comment" class="styled-topic">Add Comment</a>
+      </body>
+</html>
