@@ -27,9 +27,9 @@
         <label class="styled-text">Comments:</label>
         <ul>
             {% for comment in comments %}
-            <li> {{ comment.text }}</li>
+            <li> {{ comment.text }} ({{comment.category}})</li>
             {% endfor %}
         </ul>
-        <a href="/add_comment" class="styled-topic">Add Comment</a>
+        <a href="/add_comments/new" class="styled-topic">Add Comment</a>
       </body>
 </html>

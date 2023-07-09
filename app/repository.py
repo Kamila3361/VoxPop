@@ -1,7 +1,6 @@
 class CommentsRepository:
     def __init__(self) -> None:
         self.comments = [] #{"id":, "text":, "category":}
-        self.topic_id = 0
 
     def get_all(self):
         return self.comments
@@ -12,7 +11,7 @@ class CommentsRepository:
     def save(self, comment):
         if "id" not in comment or not comment["id"]:
             comment["id"] = self.get_next_id()
-        self.comments.append(comment)
+        self.comments.insert(0, comment)
         return comment
     
 class ListCommentRepository:
@@ -23,14 +22,16 @@ class ListCommentRepository:
         self.list_of_comments[topic_id] = comment_repo
 
     def get(self, topic_id):
-        return self.list_of_comments[topic_id]
+        if topic_id in self.list_of_comments:
+            return self.list_of_comments[topic_id]
+        return False
 
 class TopicRepository:
     def __init__(self) -> None:
         self.topics = [] #{"id":, "text":, "time":}
 
-    def get_all(self):
-        return self.topics
+    def get(self, start_index, end_index):
+        return self.topics[start_index:end_index]
 
     def get_next_id(self):
         return len(self.topics) + 1
