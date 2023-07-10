@@ -10,7 +10,7 @@ topic_repository = TopicRepository()
 list_of_comment_repo = ListCommentRepository()
 
 @app.get("/")
-def main_page(request: Request, page: int=1, limit: int=2):
+def main_page(request: Request, page: int=1, limit: int=10):
     start_index = (page - 1) * limit
     end_index = start_index + limit
     topics = topic_repository.get(start_index, end_index)
@@ -24,7 +24,7 @@ def main_page(request: Request, page: int=1, limit: int=2):
 def get_create_topic(request: Request):
     return templates.TemplateResponse("add_topic.html", {"request": request})
 
-@app.post("/create_topic")
+@app.post("/")
 def post_create_topic(text: str=Form()):
     topic = {"text": text}
     topic_repository.save(topic)
@@ -52,17 +52,19 @@ def get_topic_page(request: Request, topic_id: int):
         }
     )
     
-@app.get("/add_comments/new")
-def get_add_comments(request: Request):
+@app.get("/{topic_id}/add_comments/new")
+def get_add_comments(request: Request, topic_id: int):
+    topic = topic_repository.topics[topic_id - 1]
     return templates.TemplateResponse(
         "add_comments.html", 
         {
             "request": request,
+            "topic": topic
         }
     )
 
-@app.post("/add_comments/new")
-def post_add_comments(topic_id: int=Form(), text: str=Form(), category: str=Form()):
+@app.post("/{topic_id}")
+def post_add_comments(topic_id: int, text: str=Form(), category: str=Form()):
     comment = {"text": text, "category": category}
     comment_repo = list_of_comment_repo.get(topic_id)
     comment_repo.save(comment)
