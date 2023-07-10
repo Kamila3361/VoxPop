@@ -22,9 +22,7 @@
   </style>
 </head>
 <body>
-    <form action="/add_comments/new" method="post">
-      <label for="myNumberInput"> Topic_id: </label>
-      <input type="number" id="myNumberInput" name="topic_id" required> </br>
+    <form action="/{{ topic.id }}" method="post">
       <label> Text: </label>
       <input type="text" name="text"> </br>
       <label> Category: </label>
